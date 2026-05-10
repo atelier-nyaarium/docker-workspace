@@ -1,0 +1,25 @@
+name: Cleanup - Untagged GHCR Versions
+
+on:
+  schedule:
+    - cron: "0 4 * * 0"
+  workflow_dispatch:
+
+permissions:
+  packages: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        package: [workspace, workspace-godot]
+    steps:
+      - name: Delete untagged versions of ${{ matrix.package }}
+        uses: actions/delete-package-versions@v5
+        with:
+          package-name: ${{ matrix.package }}
+          package-type: container
+          owner: ${{ github.repository_owner }}
+          delete-only-untagged-versions: true
+          min-versions-to-keep: 3
