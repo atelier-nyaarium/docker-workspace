@@ -55,6 +55,23 @@ elif su -c 'which code' vscode >/dev/null 2>&1; then
 fi
 
 
+# Configure user-wide MCP servers in ~/.claude.json
+if command -v jq >/dev/null 2>&1; then
+	CLAUDE_JSON="/home/vscode/.claude.json"
+	[ ! -f "$CLAUDE_JSON" ] && echo '{}' > "$CLAUDE_JSON"
+	UPDATED=$(jq '
+		.mcpServers //= {} |
+		.mcpServers.playwright //= {
+			command: "npx",
+			args: ["@playwright/mcp@latest", "--headless", "--no-sandbox"],
+			env: {}
+		}
+	' "$CLAUDE_JSON")
+	echo "$UPDATED" > "$CLAUDE_JSON"
+	chown vscode:vscode "$CLAUDE_JSON"
+fi
+
+
 # Trust workspace for Claude Code, Cursor, Copilot, and Codex
 if [ -n "$PROJECT_NAME" ] && command -v jq >/dev/null 2>&1; then
 	WORKSPACE_PATH="/workspace/$PROJECT_NAME"

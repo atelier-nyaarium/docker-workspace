@@ -110,6 +110,11 @@ USER agent
 RUN curl -fsSL https://bun.sh/install | bash
 USER root
 
+# Playwright (system Chrome to /opt/google/chrome/, browser cache to /home/agent/.cache/ms-playwright)
+USER agent
+RUN npx --yes playwright@latest install chrome
+USER root
+
 COPY --chmod=755 finalize /finalize
 COPY --chmod=755 post-create-base.sh /var/post-create-base.sh
 COPY --chmod=755 post-start-base.sh /var/post-start-base.sh
