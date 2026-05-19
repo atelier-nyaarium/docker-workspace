@@ -5,10 +5,12 @@
 cat > /home/agent/.gitconfig <<EOF
 [commit]
 	gpgSign = false
-[safe]
-	directory = /workspace
 [init]
 	defaultBranch = main
+[safe]
+	directory = /workspace
+[url "git@github.com:"]
+    insteadOf = https://github.com/
 EOF
 chmod 644 /home/agent/.gitconfig
 
