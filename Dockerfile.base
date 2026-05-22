@@ -69,6 +69,7 @@ RUN groupadd -r agent \
 
 # Install Cursor, Claude, and Copilot agents
 ENV CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1
+ENV CLAUDE_CODE_DISABLE_AUTO_MEMORY=1
 ENV ENABLE_TOOL_SEARCH=false
 USER agent
 RUN curl -fsSL https://cursor.com/install | bash
