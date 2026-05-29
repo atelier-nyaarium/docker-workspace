@@ -2,7 +2,7 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
-# Devcontainer: v10
+# Devcontainer: v11
 
 # PATH setup (before interactive guard so scripts and docker exec get them too)
 export PATH="$HOME/.bun/bin:$PATH"
@@ -11,6 +11,8 @@ export PATH="$HOME/.dotnet/tools:$PATH"
 export PATH="$HOME/scripts:$PATH"
 
 export CLAUDE_CODE_DISABLE_AUTO_MEMORY="1"
+export ENABLE_TOOL_SEARCH="false"
+
 
 claude-skip() {
     command claude --dangerously-skip-permissions "$@"
