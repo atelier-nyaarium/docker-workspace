@@ -113,6 +113,7 @@ RUN curl -fsSL https://bun.sh/install | bash
 USER root
 
 # Playwright (system Chrome to /opt/google/chrome/, browser cache to /home/agent/.cache/ms-playwright)
+ENV PLAYWRIGHT_MCP_OUTPUT_DIR=/tmp/playwright-mcp
 USER agent
 RUN npx --yes playwright@latest install chrome
 USER root
