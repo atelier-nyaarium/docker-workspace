@@ -100,10 +100,11 @@ if [ -n "$PROJECT_NAME" ] && command -v jq >/dev/null 2>&1; then
 		mkdir -p /home/vscode/.copilot
 		echo '{}' > "$COPILOT_JSON"
 	fi
-	UPDATED=$(jq --arg path "$WORKSPACE_PATH" '
-		.trusted_folders //= [] |
-		if (.trusted_folders | index($path)) then . else .trusted_folders += [$path] end
-	' "$COPILOT_JSON")
+	# Copilot writes config.json as JSONC (leading // header lines); strip them before jq
+	UPDATED=$(sed 's|^[[:space:]]*//.*$||' "$COPILOT_JSON" | jq --arg path "$WORKSPACE_PATH" '
+		.trustedFolders //= [] |
+		if (.trustedFolders | index($path)) then . else .trustedFolders += [$path] end
+	')
 	echo "$UPDATED" > "$COPILOT_JSON"
 
 	# Codex: ~/.codex/config.toml
