@@ -2,7 +2,7 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
-# Devcontainer: v11
+# Devcontainer: v12
 
 # PATH setup (before interactive guard so scripts and docker exec get them too)
 export PATH="$HOME/.bun/bin:$PATH"
@@ -16,6 +16,10 @@ export ENABLE_TOOL_SEARCH="false"
 
 claude-skip() {
     command claude --dangerously-skip-permissions "$@"
+}
+
+claude-remote() {
+    command claude --dangerously-skip-permissions --dangerously-load-development-channels plugin:switchboard@atelier-nyaarium "$@"
 }
 
 if [ -f "$HOME/scripts/.env" ]; then
