@@ -2,15 +2,18 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
-# Devcontainer: v12
+# Devcontainer: v13
 
 # PATH setup (before interactive guard so scripts and docker exec get them too)
+export BUN_INSTALL="$HOME/.bun"
 export PATH="$HOME/.bun/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.dotnet/tools:$PATH"
 export PATH="$HOME/scripts:$PATH"
 
 export CLAUDE_CODE_DISABLE_AUTO_MEMORY="1"
+export CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY="1"
+export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS="1"
 export ENABLE_TOOL_SEARCH="false"
 
 
