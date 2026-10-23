@@ -42,6 +42,9 @@ jobs:
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
+        with:
+          # Docker driver sees the loaded base artifact
+          driver: ${{ inputs.base_artifact != '' && 'docker' || 'docker-container' }}
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v3
@@ -71,8 +74,9 @@ jobs:
           push: false
           load: true
           build-args: ${{ inputs.base_artifact != '' && format('BASE_IMAGE={0}', inputs.base_artifact) || '' }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          # GHA cache needs the docker-container driver
+          cache-from: ${{ inputs.base_artifact == '' && 'type=gha' || '' }}
+          cache-to: ${{ inputs.base_artifact == '' && 'type=gha,mode=max' || '' }}
 
       - name: Export image as artifact
         if: ${{ inputs.export_artifact }}
