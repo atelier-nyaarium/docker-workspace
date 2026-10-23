@@ -1,4 +1,4 @@
-FROM ubuntu:noble
+FROM ubuntu:resolute
 
 # Switch to apt noninteractive
 ENV DEBIAN_FRONTEND=noninteractive
@@ -50,7 +50,7 @@ RUN apt update -qq && apt install -qq -y \
 	&& apt autoremove --purge -qq -y \
 	&& apt clean -y && rm -rf /var/lib/apt/lists/*
 
-# Remove Ubuntu 24.04's default 'ubuntu' user (UID 1000) to unblock
+# Remove the image's default 'ubuntu' user (UID 1000) to unblock
 # devcontainer's updateRemoteUserUID remapping
 RUN userdel -r ubuntu 2>/dev/null || true \
 	&& groupdel ubuntu 2>/dev/null || true
