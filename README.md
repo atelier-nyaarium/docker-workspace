@@ -6,7 +6,7 @@ Shared base for the project devcontainers: `Dockerfile.base` and
 `devcontainer.sh` / `devcontainer-up.sh` / `devcontainer-down.sh` are the
 canonical host-side lifecycle scripts that each project carries a copy of at
 its root. `.bashrc-root` and `.bashrc-user` are the container-side shell
-profiles.
+profiles. `.bunfig.toml` is the agent's global Bun config.
 
 ## SSH agent forwarding
 

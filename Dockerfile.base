@@ -111,6 +111,7 @@ RUN npm install -g @openai/codex
 USER agent
 RUN curl -fsSL https://bun.sh/install | bash
 USER root
+COPY --chmod=644 .bunfig.toml /home/agent/.bunfig.toml
 
 # Playwright (system Chrome to /opt/google/chrome/, browser cache to /home/agent/.cache/ms-playwright)
 ENV PLAYWRIGHT_MCP_OUTPUT_DIR=/tmp/playwright-mcp
