@@ -71,6 +71,8 @@ RUN groupadd -r agent \
 ENV CLAUDE_CODE_DISABLE_AUTO_MEMORY=1
 ENV CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY=1
 ENV ENABLE_TOOL_SEARCH=false
+# docker exec reads no .bashrc, so the CLIs' homes go on the image's own PATH
+ENV PATH="/home/vscode/.local/bin:/home/vscode/.opencode/bin:/home/vscode/.bun/bin:${PATH}"
 # Switchboard refuses any other OpenCode version
 ARG OPENCODE_VERSION=2.2.5
 USER agent

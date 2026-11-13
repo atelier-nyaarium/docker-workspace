@@ -4,7 +4,7 @@
 
 # Devcontainer: v14
 
-# PATH setup (before interactive guard so scripts and docker exec get them too)
+# PATH setup (before interactive guard so sourced scripts get them too)
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$HOME/.bun/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
